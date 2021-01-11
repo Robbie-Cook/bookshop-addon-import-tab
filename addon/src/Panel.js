@@ -42,12 +42,8 @@ function searchTree(item) {
 }
 
 const HTMLPanel = () => {
-  const [html, setHTML] = useState('');
-  const [code, setCode] = useState('');
-
   const state = useStorybookState();
-  const api = useStorybookApi();
-  console.log('api');
+  // const api = useStorybookApi();
 
   const id = state.storyId;
 
@@ -55,7 +51,6 @@ const HTMLPanel = () => {
 
   const story = state.storiesHash[id];
   if (story) {
-    // console.log('story.args', story.args);
     const componentParts = story.kind.split('/');
     const componentName = componentParts[componentParts.length - 1];
 
@@ -79,20 +74,11 @@ const HTMLPanel = () => {
 
     // Handle repeat-count in storybook
     const repeatedArgs = searchTree(normalizedArgs);
-    console.log('ra', repeatedArgs);
 
     importText = `component("${componentName.toLowerCase()}", ${JSON.stringify(
       repeatedArgs,
     )})`;
-    // console.log(importText);
   }
-  // console.log('state', state);
-
-  // const parameters = useParameter(PARAM_KEY, {});
-  // const {
-  //   highlighter: { showLineNumbers = false, wrapLines = true } = {},
-  //   prettier = {},
-  // } = parameters;
 
   return (
     <SyntaxHighlighter
