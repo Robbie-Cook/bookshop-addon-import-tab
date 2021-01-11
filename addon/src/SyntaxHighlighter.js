@@ -67,7 +67,7 @@ export default class SyntaxHighlighter extends Component {
   render() {
     const {
       children,
-      language = 'jsx',
+      language = 'js',
       copyable,
       bordered,
       padded,

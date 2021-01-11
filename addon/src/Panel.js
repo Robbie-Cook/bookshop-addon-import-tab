@@ -5,7 +5,7 @@ import SyntaxHighlighter from './SyntaxHighlighter';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/github-gist';
 import { format as prettierFormat } from 'prettier/standalone';
 import prettier from "prettier";
-
+import parser from 'prettier/parser-babel'
 
 import { EVENT_CODE_RECEIVED } from './shared';
 
@@ -21,9 +21,9 @@ const HTMLPanel = () => {
 
   const id = state.storyId;
 
-  const story = state.storiesHash[id];
-
   let importText = "";
+  
+  const story = state.storiesHash[id];
   if (story) {
     console.log('story', story);
     const componentParts = story.kind.split('/');
@@ -45,7 +45,8 @@ const HTMLPanel = () => {
     }
 
   
-    importText = `component("${componentName.toLowerCase()}", ${JSON.stringify(normalizedArgs)}) %>`;
+    importText = `component("${componentName.toLowerCase()}", ${JSON.stringify(normalizedArgs)})`;
+    console.log(importText)
   }
   // console.log('state', state);
 
@@ -63,10 +64,10 @@ const HTMLPanel = () => {
       copyable={true}
       padded={true}
       style={style}
-      showLineNumbers={showLineNumbers}
-      wrapLines={wrapLines}
+      showLineNumbers={true}
+      wrapLines={false}
     >
-      {`<%- ${prettier.format("foo ( );", { semi: false, parser: "babel" })} %>`}
+      {`<%- ${prettier.format(importText, { semi: false, parser: "babel", plugins: [parser] }).replace(/[\r\n]+$/,'')} %>`}
     </SyntaxHighlighter>
   );
 };
