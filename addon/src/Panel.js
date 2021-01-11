@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useChannel, useParameter } from '@storybook/api';
+import { useChannel, useParameter, useStorybookState, useStorybookApi } from '@storybook/api';
 
 import SyntaxHighlighter from './SyntaxHighlighter';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/github-gist';
 import { format as prettierFormat } from 'prettier/standalone';
-import prettierHtml from 'prettier/parser-html';
+import prettier from "prettier";
+
 
 import { EVENT_CODE_RECEIVED } from './shared';
 
@@ -14,38 +15,58 @@ const HTMLPanel = () => {
   const [html, setHTML] = useState('');
   const [code, setCode] = useState('');
 
-  const parameters = useParameter(PARAM_KEY, {});
-  const {
-    highlighter: { showLineNumbers = false, wrapLines = true } = {},
-    prettier = {},
-  } = parameters;
+  const state = useStorybookState();
+  const api = useStorybookApi();
+  console.log('api')
 
-  const prettierConfig = {
-    htmlWhitespaceSensitivity: 'ignore',
-    ...prettier,
-    // Ensure we always pick the html parser
-    parser: 'html',
-    plugins: [prettierHtml],
-  };
+  const id = state.storyId;
 
-  useChannel({
-    [EVENT_CODE_RECEIVED]: ({ html }) => {
-      setHTML(html);
-    },
-  });
-  useEffect(() => {
-    setCode(prettierFormat(html, prettierConfig));
-  }, [html]);
+  const story = state.storiesHash[id];
+
+  let importText = "";
+  if (story) {
+    console.log('story', story);
+    const componentParts = story.kind.split('/');
+    const componentName = componentParts[componentParts.length - 1];
+
+    // Turn args to a proper object
+    const normalizedArgs = {};
+    const entries = Object.entries(story.args);
+    for (const [key, item] of entries) {
+      // Don't include bookshop-reserved keys
+      if (key !== "framework" && !key.includes("repeat-count")) {
+        if (key.includes('&&')) {
+          const items = key.split('&&');
+          normalizedArgs[items[0]] = { ...normalizedArgs[items[0]], [items[1]]: item }
+        } else {
+          normalizedArgs[key] = item;
+        }
+      }
+    }
+
+  
+    importText = `component("${componentName.toLowerCase()}", ${JSON.stringify(normalizedArgs)}) %>`;
+  }
+  // console.log('state', state);
+
+
+
+  // const parameters = useParameter(PARAM_KEY, {});
+  // const {
+  //   highlighter: { showLineNumbers = false, wrapLines = true } = {},
+  //   prettier = {},
+  // } = parameters;
+
   return (
     <SyntaxHighlighter
-      language={'xml'}
+      language={'js'}
       copyable={true}
       padded={true}
       style={style}
       showLineNumbers={showLineNumbers}
       wrapLines={wrapLines}
     >
-      {code}
+      {`<%- ${prettier.format("foo ( );", { semi: false, parser: "babel" })} %>`}
     </SyntaxHighlighter>
   );
 };
