@@ -30,8 +30,8 @@ function searchTree(item) {
         newObject = [];
         // Put the object in the array `repeat-count` times
         const count = item['repeat-count'];
+        delete item['repeat-count'];
         for (let i = 0; i < count; i++) {
-          delete item['repeat-count'];
           newObject.push(item);
         }
       }
