@@ -4,12 +4,12 @@ import { addons, types } from '@storybook/addons';
 
 import Panel from './Panel';
 
-const ADDON_ID = 'html';
+const ADDON_ID = 'Bookshop';
 const PANEL_ID = `${ADDON_ID}/panel`;
 
 addons.register(ADDON_ID, () => {
   addons.add(PANEL_ID, {
-    title: 'Bookshop Import',
+    title: 'Bookshop',
     type: types.PANEL,
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
