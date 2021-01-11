@@ -20,6 +20,7 @@
   "scripts": {
     "build": "yarn clean && babel -d ./out ./src",
     "build:watch": "babel --watch -d ./out ./src",
+    "start": "npm run build:watch",
     "clean": "rm -rf ./out",
     "prepare": "yarn build",
     "prepublishOnly": "cp ../README.md ."
