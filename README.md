@@ -1,6 +1,6 @@
-# Storybook Addon HTML
+# Bookshop Addon HTML
 
-This addon for Storybook adds a tab that displays some import code for each
+This addon for Bookshop adds a tab that displays some import code for each
 story. It is forked from [whitespace-se/storybook-addon-html](https://github.com/whitespace-se/storybook-addon-html)
 
 ![Animated preview](https://raw.githubusercontent.com/whitespace-se/storybook-addon-html/master/image.gif)
