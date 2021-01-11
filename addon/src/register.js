@@ -9,7 +9,7 @@ const PANEL_ID = `${ADDON_ID}/panel`;
 
 addons.register(ADDON_ID, () => {
   addons.add(PANEL_ID, {
-    title: 'HTML',
+    title: 'Bookshop Import',
     type: types.PANEL,
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
