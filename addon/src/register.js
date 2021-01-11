@@ -60,7 +60,7 @@ const LogicWrapper = (props) => {
   console.log(story);
   if (story) {
     const componentParts = story.kind.replaceAll(' ', '-').split('/');
-    const componentName = componentParts.slice(1);
+    const componentName = componentParts.slice(1).join('/');
 
     // Turn args to a proper object
     const normalizedArgs = {};
