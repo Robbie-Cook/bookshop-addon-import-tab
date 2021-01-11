@@ -58,7 +58,7 @@ const LogicWrapper = (props) => {
 
   const story = state.storiesHash[id];
   if (story) {
-    const componentParts = story.kind.split('/');
+    const componentParts = story.kind.replaceAll(' ', '-').split('/');
     const componentName = componentParts[componentParts.length - 1];
 
     // Turn args to a proper object
