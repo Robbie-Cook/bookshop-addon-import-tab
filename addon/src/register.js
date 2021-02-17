@@ -83,6 +83,8 @@ const LogicWrapper = (props) => {
     // Handle repeat-count in storybook
     const repeatedArgs = searchTree(normalizedArgs);
 
+    console.log('repeatedArgs', repeatedArgs);
+
     const importText = `component("${componentName.toLowerCase()}", ${JSON.stringify(
       repeatedArgs,
     )})`;

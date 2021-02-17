@@ -14,7 +14,7 @@ const Pre = styled.pre(({ theme, padded }) => ({
 }));
 
 const Code = styled.code`
-  user-select: all;
+  /* user-select: all; */
   flex: 1;
   padding-right: 0;
   opacity: 1;
