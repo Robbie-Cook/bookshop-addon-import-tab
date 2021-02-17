@@ -10,13 +10,13 @@ story. It is forked from [whitespace-se/storybook-addon-html](https://github.com
 With NPM:
 
 ```sh
-npm i --save-dev @robbie-cook/bookshop-addon-import-tab
+npm i --save-dev bookshop-addon-import-tab
 ```
 
 With Yarn:
 
 ```sh
-yarn add -D @robbie-cook/bookshop-addon-import-tab
+yarn add -D bookshop-addon-import-tab
 ```
 
 ### Register addon
@@ -27,7 +27,7 @@ yarn add -D @robbie-cook/bookshop-addon-import-tab
 module.exports = {
   // ...
   addons: [
-    '@robbie-cook/bookshop-addon-import-tab',
+    'bookshop-addon-import-tab',
     // ...
   ],
 };
