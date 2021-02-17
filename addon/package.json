@@ -1,6 +1,6 @@
 {
-  "name": "@robbie-cook/bookshop-addon-import-tab",
-  "version": "1.2.5",
+  "name": "bookshop-addon-import-tab",
+  "version": "1.2.4",
   "description": "A Storybook addon that gives an example for importing a component",
   "main": "out/preset.js",
   "files": [
